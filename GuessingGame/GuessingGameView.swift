@@ -21,6 +21,7 @@ import SwiftUI
 // TRY: Change highestNumber to 10 for an easy game, or to 1000 for a hard one.
 let lowestNumber: Int = 1
 let highestNumber: Int = 1000
+let randomNumber: Int = Int.random(in:1...100)
 
 // The game itself: what it remembers, what it shows on the screen,
 // and what it does when you click a button.
@@ -126,8 +127,8 @@ struct GuessingGameView: View {
                     Button("Play Again", systemImage: "arrow.clockwise") {
                         startNewGame()
                         if guessCount == 20 {
-                        gameIsOver = false
-                            }
+                            gameIsOver = false
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(Color.green)
@@ -155,105 +156,109 @@ struct GuessingGameView: View {
             
             
             
-                
-        }
-        }
-        
-        // MARK: - Functions
-        
-        // Checks the player's guess against the secret number.
-        
-        func checkGuess() {
             
-            // One more guess has been made.
-            guessCount += 1
-            
-            if guess == secretNumber {
-                message = "Yes! \(secretNumber) is my number."
-                messageSymbol = "hand.thumbsup"
-                messageColor = Color.green
-                gameIsOver = true
-                // TRY: Change this message. Make it kinder, or sillier.
-            }else if guess < secretNumber{
-                message = "\(guess) is lower my number. Try again."
-                messageSymbol = "xmark.circle.fill"
-                messageColor = Color.orange
-            }else{
-                message = "\(guess) is higher than my number"
-                messageSymbol = "xmark.circle.fill"
-                messageColor = Color.pink
-            }
-        
         }
+    }
     
-        
-        
-        // Makes the guess 10 smaller, but never smaller than the lowest number.
-        func lowerGuessByTen() {
-            guess -= 10
-            if guess < lowestNumber {
-                message = " lower "
-            }
-        }
-        
-        
-        // Makes the guess 1 smaller, but never smaller than the lowest number.
-        func lowerGuessByOne() {
-            guess -= 1
-            if guess < secretNumber {
-                message = "higher"
-            }
-        }
-        
-        // Makes the guess 1 bigger, but never bigger than the highest number.
-        func raiseGuessByOne() {
-            guess += 1
-            if guess > secretNumber {
-                message = " lower "
-            }
-        }
-        
-        // Makes the guess 10 bigger, but never bigger than the highest number.
-        func raiseGuessByTen() {
-            guess += 10
-            if guess > highestNumber {
-                guess = highestNumber
-            }
-        }
-        func raiseGuessByHundred() {
-            guess += 100
-        }
-        func lowerGuessByHundred() {
-            guess -= 100
-        }
-        // Picks a new secret number and resets everything else.
-        func startNewGame() {
-            secretNumber = Int.random(in: lowestNumber...highestNumber)
-            guess = (lowestNumber + highestNumber) / 2
-            guessCount = 0
-            message = "I'm thinking of a new number from \(lowestNumber) to \(highestNumber)."
-            messageSymbol = "questionmark.circle.fill"
-            messageColor = Color.indigo
-            gameIsOver = false
-            }
-        func SecretNumberhigh50() {
-            secretNumber += randomNumber
-        }
+    // MARK: - Functions
     
-        func SecretNumberlow50() {
-            secretNumber -= randomNumber
-        }
-    let randomNumber: Int = Int.random(in:1...100)
-        
+    // Checks the player's guess against the secret number.
     
+    func checkGuess() {
+        
+        // One more guess has been made.
+        guessCount += 1
+        
+        if guess == secretNumber {
+            message = "Yes! \(secretNumber) is my number."
+            messageSymbol = "hand.thumbsup"
+            messageColor = Color.green
+            gameIsOver = true
+            // TRY: Change this message. Make it kinder, or sillier.
+        } else if guess < secretNumber {
+            message = "\(guess) is lower my number. Try again."
+            messageSymbol = "xmark.circle.fill"
+            messageColor = Color.orange
+        } else {
+            message = "\(guess) is higher than my number"
+            messageSymbol = "xmark.circle.fill"
+            messageColor = Color.pink
         }
+        
+    }
+    
+    
+    
+    // Makes the guess 10 smaller, but never smaller than the lowest number.
+    func lowerGuessByTen() {
+        guess -= 10
+        if guess < lowestNumber {
+            message = " lower "
+        }
+    }
+    
+    
+    // Makes the guess 1 smaller, but never smaller than the lowest number.
+    func lowerGuessByOne() {
+        guess -= 1
+        if guess < secretNumber {
+            message = "higher"
+        }
+    }
+    
+    // Makes the guess 1 bigger, but never bigger than the highest number.
+    func raiseGuessByOne() {
+        guess += 1
+        if guess > secretNumber {
+            message = " lower "
+        }
+    }
+    
+    // Makes the guess 10 bigger, but never bigger than the highest number.
+    func raiseGuessByTen() {
+        guess += 10
+        if guess > highestNumber {
+            guess = highestNumber
+        }
+    }
+    func raiseGuessByHundred() {
+        guess += 100
+    }
+    
+    func lowerGuessByHundred() {
+        guess -= 100
+    }
+    
+    // Picks a new secret number and resets everything else.
+    func startNewGame() {
+        secretNumber = Int.random(in: lowestNumber...highestNumber)
+        guess = (lowestNumber + highestNumber) / 2
+        guessCount = 0
+        message = "I'm thinking of a new number from \(lowestNumber) to \(highestNumber)."
+        messageSymbol = "questionmark.circle.fill"
+        messageColor = Color.indigo
+        gameIsOver = false
+    }
+    
+    func SecretNumberhigh50() {
+        secretNumber += randomNumber
+    }
+    
+    func SecretNumberlow50() {
+        secretNumber -= randomNumber
+    }
+    
+    
+    
+    
+}
 
-    
 
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
 
