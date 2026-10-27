@@ -46,6 +46,11 @@ struct GuessingGameView: View {
     @State var messageSymbol: String = "questionmark.circle.fill"
     @State var messageColor: Color = Color.blue
     
+    // The top and bottom range for the hint
+    @State var lowerEndOfHintRange: Int = lowestNumber
+    @State var upperEndOfHintRange: Int = highestNumber
+
+    
     // Becomes true when the player finds the secret number.
     @State var gameIsOver: Bool = false
     
@@ -113,7 +118,7 @@ struct GuessingGameView: View {
                     raiseGuessByHundred()
                 }
                 Button("Hint") {
-                    message = " The answer is between \(secretNumber) and \(secretNumber)"
+                    provideHint()
                 }
                 .buttonStyle(.bordered)
                 .font(.title3)
@@ -184,10 +189,7 @@ struct GuessingGameView: View {
             messageSymbol = "xmark.circle.fill"
             messageColor = Color.pink
         }
-        
-        // Run these functions to change the hint values
-        SecretNumberlow50()
-        SecretNumberhigh50()
+    
         
     }
     
@@ -242,6 +244,25 @@ struct GuessingGameView: View {
         messageSymbol = "questionmark.circle.fill"
         messageColor = Color.indigo
         gameIsOver = false
+    }
+    
+    func provideHint() {
+        
+        let x = Int.random(in: (lowestNumber + 100)...(highestNumber - 100)) / 2
+        lowerEndOfHintRange = secretNumber - x
+        upperEndOfHintRange = secretNumber + x
+        
+        // Make sure lower end of hint isn't lower than 1
+        if lowerEndOfHintRange < 1 {
+            lowerEndOfHintRange = 1
+        }
+        
+        // Make sure higher end of hint isn't higher than 1000
+        if upperEndOfHintRange > 1000 {
+            upperEndOfHintRange = 1000
+        }
+        
+        message = "The answer is between \(lowerEndOfHintRange) and \(upperEndOfHintRange)"
     }
     
     func SecretNumberhigh50() {
