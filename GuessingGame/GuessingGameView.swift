@@ -113,7 +113,7 @@ struct GuessingGameView: View {
                     raiseGuessByHundred()
                 }
                 Button("Hint") {
-                    message = " The answer is between \(String(describing: SecretNumberlow50)) and \(String(describing: SecretNumberhigh50))"
+                    message = " The answer is between \(secretNumber) and \(secretNumber)"
                 }
                 .buttonStyle(.bordered)
                 .font(.title3)
@@ -184,6 +184,10 @@ struct GuessingGameView: View {
             messageSymbol = "xmark.circle.fill"
             messageColor = Color.pink
         }
+        
+        // Run these functions to change the hint values
+        SecretNumberlow50()
+        SecretNumberhigh50()
         
     }
     
