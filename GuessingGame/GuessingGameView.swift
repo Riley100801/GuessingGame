@@ -19,8 +19,8 @@ import SwiftUI
 // The game's settings. They sit up here, outside the game,
 // so that every part of the game below can use them.
 // TRY: Change highestNumber to 10 for an easy game, or to 1000 for a hard one.
-let lowestNumber: Int = 1
-let highestNumber: Int = 1000
+var lowestNumber: Int = 1
+var highestNumber: Int = 1000
 let randomNumber: Int = Int.random(in:1...100)
 
 // The game itself: what it remembers, what it shows on the screen,
@@ -40,7 +40,7 @@ struct GuessingGameView: View {
     
     // How many guesses the player has made in this game.
     @State var guessCount: Int = 0
-    
+    @State var Point: Int = 0
     // The message shown to the player, with a symbol and a colour to match it.
     @State var message: String = "I'm thinking of a number from \(lowestNumber) to \(highestNumber)."
     @State var messageSymbol: String = "questionmark.circle.fill"
@@ -63,6 +63,7 @@ struct GuessingGameView: View {
             HStack {
                 Image(systemName: "sparkle.magnifyingglass")
                 Text("Guessing Game")
+                Text("\(Point)")
             }
             .font(.largeTitle)
             .bold()
@@ -126,11 +127,14 @@ struct GuessingGameView: View {
                 .monospacedDigit()
                 .disabled(gameIsOver)
                 
+                
+                
                 // Show the Guess button while the game is on,
                 // and the Play Again button once the number is found.
                 if gameIsOver {
                     Button("Play Again", systemImage: "arrow.clockwise") {
                         startNewGame()
+                        Point += 1
                         if guessCount == 20 {
                             gameIsOver = false
                         }
@@ -146,6 +150,9 @@ struct GuessingGameView: View {
                 HStack {
                     Image(systemName: "dice.fill")
                     Text("Guesses so far: \(guessCount)")
+                }
+                HStack {
+                    Text("Point: \(Point)")
                 }
                 .font(.headline)
                 .foregroundStyle(Color.secondary)
@@ -248,7 +255,7 @@ struct GuessingGameView: View {
     
     func provideHint() {
         
-        let x = Int.random(in: (lowestNumber + 100)...(highestNumber - 100)) / 2
+        let x = Int.random(in: 1...100)
         lowerEndOfHintRange = secretNumber - x
         upperEndOfHintRange = secretNumber + x
         
