@@ -27,6 +27,8 @@ let randomNumber: Int = Int.random(in:1...100)
 // and what it does when you click a button.
 struct GuessingGameView: View {
     
+    
+    
     // MARK: - Stored properties
     
     // Each @State variable is something the game remembers.
@@ -53,11 +55,10 @@ struct GuessingGameView: View {
     
     // Becomes true when the player finds the secret number.
     @State var gameIsOver: Bool = false
-    
-    // MARK: - Computed properties
+        // MARK: - Computed properties
     
     var body: some View {
-        VStack(spacing: 20) {
+                VStack(spacing: 20) {
             
             // The title at the top of the screen.
             HStack {
@@ -147,15 +148,25 @@ struct GuessingGameView: View {
                     }
                     .buttonStyle(.borderedProminent)
                 }
+                
+                
                 HStack {
                     Image(systemName: "dice.fill")
                     Text("Guesses so far: \(guessCount)")
                 }
+                
                 HStack {
                     Text("Point: \(Point)")
                 }
+                
+                HStack {
+                    Button("Surprise") {
+                        CheckPoint()
+                    }
+                }
                 .font(.headline)
                 .foregroundStyle(Color.secondary)
+                
             }
             .padding(32)
             .font(.title2)
@@ -167,7 +178,7 @@ struct GuessingGameView: View {
             .frame(minWidth: 420, minHeight: 640)
             
             
-            
+           
             
         }
     }
@@ -175,6 +186,7 @@ struct GuessingGameView: View {
     // MARK: - Functions
     
     // Checks the player's guess against the secret number.
+    
     
     func checkGuess() {
         
@@ -196,6 +208,8 @@ struct GuessingGameView: View {
             messageSymbol = "xmark.circle.fill"
             messageColor = Color.pink
         }
+        
+
     
         
     }
@@ -279,9 +293,24 @@ struct GuessingGameView: View {
     func SecretNumberlow50() {
         secretNumber -= randomNumber
     }
+    func Point5() {
+         message = " Good job. When you get 10 points, you will know a surprising thing"
+    }
+    func Point10() {
+        message = " surprise!!!"
+        message = " Nothing!!! HaHaHaHaHaHaHaHa......"
+    }
     
-    
-    
+    func CheckPoint() {
+        if Point == 5 {
+            message = "Good job. When you get 10 point, you will get a surprising thing"
+        } else if Point == 10 {
+            message = " WOW! you did a excellent job!!!                                                                              The surprise is ...... Nothing.           HaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHa"
+        } else {
+            message = " Not yet. Keep working"
+        }
+            
+    }
     
 }
 
