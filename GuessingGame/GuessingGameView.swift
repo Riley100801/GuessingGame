@@ -58,7 +58,7 @@ struct GuessingGameView: View {
         // MARK: - Computed properties
     
     var body: some View {
-                VStack(spacing: 20) {
+        VStack(spacing: 20) {
             
             // The title at the top of the screen.
             HStack {
@@ -122,6 +122,7 @@ struct GuessingGameView: View {
                 Button("Hint") {
                     provideHint()
                 }
+            }
                 .buttonStyle(.bordered)
                 .font(.title3)
                 .bold()
@@ -167,7 +168,7 @@ struct GuessingGameView: View {
                 .font(.headline)
                 .foregroundStyle(Color.secondary)
                 
-            }
+        }
             .padding(32)
             .font(.title2)
             .fontDesign(.rounded)
@@ -180,7 +181,7 @@ struct GuessingGameView: View {
             
            
             
-        }
+        
     }
     
     // MARK: - Functions
@@ -265,6 +266,12 @@ struct GuessingGameView: View {
         messageSymbol = "questionmark.circle.fill"
         messageColor = Color.indigo
         gameIsOver = false
+        if guess < 1 {
+            GuessisOne()
+        }
+        if guess > 1000 {
+            Guessisthousand()
+        }
     }
     
     func provideHint() {
@@ -312,6 +319,12 @@ struct GuessingGameView: View {
             
     }
     
+    func GuessisOne() {
+        guess = 1
+    }
+    func Guessisthousand() {
+        guess = 1000
+    }
 }
 
 
