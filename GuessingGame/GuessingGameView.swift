@@ -194,20 +194,34 @@ struct GuessingGameView: View {
         // One more guess has been made.
         guessCount += 1
         
-        if guess == secretNumber {
+        // make guess won't higher than 1000 and lower than 1
+        
+        
+        if guess > secretNumber && guess > 1000 {
+        Guessisthousand()
+        message = "Almost! \(guess) is higher than my number. Try again~~~"
+        messageSymbol = "xmark.circle.fill"
+        messageColor = Color.pink
+            // TRY: Change this message. Make it kinder, or sillier. done
+        } else if guess < secretNumber && guess < 1 {
+            GuessisOne()
+            message = "Almost! \(guess) is lower my number. Try again~~~."
+            messageSymbol = "xmark.circle.fill"
+            messageColor = Color.orange
+        } else if guess == secretNumber {
             message = "Yes! \(secretNumber) is my number."
             messageSymbol = "hand.thumbsup"
             messageColor = Color.green
             gameIsOver = true
-            // TRY: Change this message. Make it kinder, or sillier.
-        } else if guess < secretNumber {
-            message = "\(guess) is lower my number. Try again."
+        }else if guess < secretNumber {
+            message = "Almost! \(guess) is lower my number. Try again~~~."
             messageSymbol = "xmark.circle.fill"
             messageColor = Color.orange
-        } else {
-            message = "\(guess) is higher than my number"
+        }else{
+            message = "Almost! \(guess) is higher than my number. Try again~~~"
             messageSymbol = "xmark.circle.fill"
             messageColor = Color.pink
+        
         }
         
 
@@ -266,12 +280,7 @@ struct GuessingGameView: View {
         messageSymbol = "questionmark.circle.fill"
         messageColor = Color.indigo
         gameIsOver = false
-        if guess < 1 {
-            GuessisOne()
-        }
-        if guess > 1000 {
-            Guessisthousand()
-        }
+        
     }
     
     func provideHint() {
